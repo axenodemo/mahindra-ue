@@ -1,6 +1,44 @@
 /* cards-business - 3x3 grid of business vertical cards (Mahindra design) */
 
-.cards-business ul {
+/* Fade-up animation for scroll reveal */
+@keyframes cards-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section container */
+.section.cards-business-container {
+  padding: 48px 0;
+}
+
+/* Section header */
+.section.cards-business-container .default-content-wrapper {
+  text-align: center;
+  padding-bottom: 32px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.section.cards-business-container.cards-business-visible .default-content-wrapper {
+  animation: cards-fade-up 0.65s ease-out both;
+}
+
+.section.cards-business-container .default-content-wrapper p {
+  color: var(--dark-color);
+  font-size: 16px;
+  margin: 0 auto;
+  max-width: 70%;
+}
+
+/* Grid layout */
+.cards-business > ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -9,65 +47,121 @@
   gap: 12px;
 }
 
-.cards-business ul > li {
+/* Card item - hidden until scroll triggers */
+.cards-business > ul > li {
   position: relative;
   overflow: hidden;
   border: none;
-  background-color: var(--text-color);
+  border-radius: 8px;
+  background-color: #1a1a1a;
   cursor: pointer;
+  aspect-ratio: 5 / 2;
   transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(40px);
 }
 
-.cards-business ul > li:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+/* Hover effect */
+.cards-business > ul > li:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 25%);
 }
 
-.cards-business .cards-business-card-image {
-  position: relative;
+/* Staggered card animation on scroll */
+.cards-business-visible .cards-business > ul > li:nth-child(1) { animation: cards-fade-up 0.65s 0.1s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(2) { animation: cards-fade-up 0.65s 0.15s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(3) { animation: cards-fade-up 0.65s 0.2s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(4) { animation: cards-fade-up 0.65s 0.25s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(5) { animation: cards-fade-up 0.65s 0.3s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(6) { animation: cards-fade-up 0.65s 0.35s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(7) { animation: cards-fade-up 0.65s 0.4s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(8) { animation: cards-fade-up 0.65s 0.45s ease-out both; }
+.cards-business-visible .cards-business > ul > li:nth-child(9) { animation: cards-fade-up 0.65s 0.5s ease-out both; }
+
+/* Image div (first child) - absolute fill */
+.cards-business .cards-business-card-body:first-child {
+  position: absolute;
+  inset: 0;
+  line-height: 0;
+  margin: 0;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.cards-business .cards-business-card-body:first-child p {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+.cards-business .cards-business-card-body:first-child img {
   width: 100%;
-}
-
-.cards-business .cards-business-card-image picture > img {
-  display: block;
   height: 100%;
-  width: 100%;
-  aspect-ratio: 4 / 3;
   object-fit: cover;
+  display: block;
 }
 
-.cards-business .cards-business-card-body {
+/* Title overlay (last child) - positioned at bottom-left */
+.cards-business .cards-business-card-body:last-child {
   position: absolute;
   bottom: 0;
   left: 0;
-  right: 0;
   margin: 0;
-  padding: 32px 16px 16px;
-  background: linear-gradient(to top, rgb(0 0 0 / 75%) 0%, transparent 100%);
+  padding: 16px 24px;
+  z-index: 1;
 }
 
-.cards-business .cards-business-card-body h3,
-.cards-business .cards-business-card-body p {
+/* Title text with underline and arrow */
+/* stylelint-disable-next-line no-descending-specificity */
+.cards-business .cards-business-card-body:last-child p {
   color: #fff;
-  text-transform: uppercase;
-  font-family: var(--heading-font-family);
-  font-weight: 500;
-  font-size: var(--body-font-size-xs);
-  letter-spacing: 0.5px;
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0;
   margin: 0;
   line-height: 1.3;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #fff;
+}
+
+/* Diagonal arrow ↗ after title text */
+.cards-business .cards-business-card-body:last-child p::after {
+  content: '↗';
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 /* Tablet: 2 columns */
 @media (width >= 600px) {
-  .cards-business ul {
+  .cards-business > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop: 3 columns */
+/* Desktop: 3 columns with original proportions */
 @media (width >= 900px) {
-  .cards-business ul {
+  .section.cards-business-container {
+    padding: 80px 0;
+  }
+
+  .cards-business > ul {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section.cards-business-container .default-content-wrapper p {
+    font-size: 18px;
+  }
+
+  .cards-business .cards-business-card-body:last-child p {
+    font-size: 18px;
   }
 }
