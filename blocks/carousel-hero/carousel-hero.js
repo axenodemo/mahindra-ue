@@ -147,5 +147,22 @@ export default async function decorate(block) {
 
   if (!isSingleSlide) {
     bindEvents(block);
+
+    // Auto-scroll every 5 seconds
+    let autoScrollInterval = setInterval(() => {
+      const current = parseInt(block.dataset.activeSlide, 10) || 0;
+      showSlide(block, current + 1);
+    }, 5000);
+
+    // Pause on hover
+    block.addEventListener('mouseenter', () => {
+      clearInterval(autoScrollInterval);
+    });
+    block.addEventListener('mouseleave', () => {
+      autoScrollInterval = setInterval(() => {
+        const current = parseInt(block.dataset.activeSlide, 10) || 0;
+        showSlide(block, current + 1);
+      }, 5000);
+    });
   }
 }
