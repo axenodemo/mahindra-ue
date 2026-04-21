@@ -351,7 +351,7 @@ var CustomImportScript = (() => {
       rows.push([questionCell, answerCell]);
     });
     const block = WebImporter.Blocks.createBlock(document, {
-      name: "Accordion FAQ",
+      name: "Accordion Faq",
       cells: rows
     });
     element.replaceWith(block);
@@ -459,7 +459,7 @@ var CustomImportScript = (() => {
       },
       {
         name: "cards-performance",
-        instances: ["#block-companyrise .performace-driven-cards"]
+        instances: ["#block-companyrise section.spirit-of-rise:not(.grey-bg) .performace-driven-cards"]
       },
       {
         name: "cards-future",
