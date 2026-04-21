@@ -21,4 +21,18 @@ export default function decorate(block) {
   });
   block.textContent = '';
   block.append(ul);
+
+  // Scroll-triggered fade-up animation
+  const section = block.closest('.section');
+  if (section) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          section.classList.add('cards-perf-visible');
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(section);
+  }
 }

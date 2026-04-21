@@ -84,15 +84,16 @@
   transform: translateY(0);
 }
 
-.cards-business-visible .cards-business > ul > li:nth-child(1) { transition-delay: 0.05s; }
-.cards-business-visible .cards-business > ul > li:nth-child(2) { transition-delay: 0.1s; }
-.cards-business-visible .cards-business > ul > li:nth-child(3) { transition-delay: 0.15s; }
-.cards-business-visible .cards-business > ul > li:nth-child(4) { transition-delay: 0.2s; }
-.cards-business-visible .cards-business > ul > li:nth-child(5) { transition-delay: 0.25s; }
-.cards-business-visible .cards-business > ul > li:nth-child(6) { transition-delay: 0.3s; }
-.cards-business-visible .cards-business > ul > li:nth-child(7) { transition-delay: 0.35s; }
+/* Per-card delays matching live site AOS data-aos-delay values */
+.cards-business-visible .cards-business > ul > li:nth-child(1) { transition-delay: 0.1s; }
+.cards-business-visible .cards-business > ul > li:nth-child(2) { transition-delay: 0.4s; }
+.cards-business-visible .cards-business > ul > li:nth-child(3) { transition-delay: 0.1s; }
+.cards-business-visible .cards-business > ul > li:nth-child(4) { transition-delay: 0.7s; }
+.cards-business-visible .cards-business > ul > li:nth-child(5) { transition-delay: 0.1s; }
+.cards-business-visible .cards-business > ul > li:nth-child(6) { transition-delay: 0.7s; }
+.cards-business-visible .cards-business > ul > li:nth-child(7) { transition-delay: 0.4s; }
 .cards-business-visible .cards-business > ul > li:nth-child(8) { transition-delay: 0.4s; }
-.cards-business-visible .cards-business > ul > li:nth-child(9) { transition-delay: 0.45s; }
+.cards-business-visible .cards-business > ul > li:nth-child(9) { transition-delay: 0.7s; }
 
 /* Image div (first child) - absolute fill */
 .cards-business .cards-business-card-body:first-child {
