@@ -1,0 +1,31 @@
+{
+  "variantName": "cards-performance",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-04-21T08:10:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.mahindra.com/",
+    "originPage": "Mahindra corporate homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "performance-stats",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + category + stats list",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": ["performance dashboards", "stats showcases"],
+    "notSuitableFor": ["text-only listings", "image galleries"]
+  },
+  "usage": {
+    "pagesUsing": ["/content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-21T08:10:00.000Z"
+  }
+}
