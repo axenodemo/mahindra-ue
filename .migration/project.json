@@ -1,0 +1,9 @@
+{
+  "type": "xwalk",
+  "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json",
+  "contentHostUrl": "author-p8803-e21945.adobeaemcloud.com",
+  "aemSitePath": "/content/mahindra-ue",
+  "aemAssetsFolderPath": "/content/dam/mahindra-ue",
+  "aemSiteName": "mahindra-ue",
+  "aemSiteTitle": "Mahindra UE"
+}

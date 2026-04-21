@@ -1,0 +1,70 @@
+{
+  "definitions": [
+    {
+      "title": "Cards Work",
+      "id": "cards-work",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Cards Work",
+              "filter": "cards-work"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Cards Work Item",
+      "id": "cards-work-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Cards Work Item",
+              "model": "cards-work-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards-work-item",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "media_image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "media_imageAlt",
+          "value": "",
+          "label": "Image Alt"
+        },
+        {
+          "component": "richtext",
+          "name": "content_text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-work",
+      "components": [
+        "cards-work-item"
+      ]
+    }
+  ]
+}

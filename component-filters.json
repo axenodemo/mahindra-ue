@@ -19,9 +19,57 @@
     ]
   },
   {
+    "id": "accordion-faq",
+    "components": [
+      "accordion-faq-item"
+    ]
+  },
+  {
+    "id": "cards-business",
+    "components": [
+      "cards-business-item"
+    ]
+  },
+  {
+    "id": "cards-future",
+    "components": [
+      "cards-future-item"
+    ]
+  },
+  {
+    "id": "cards-news",
+    "components": [
+      "cards-news-item"
+    ]
+  },
+  {
+    "id": "cards-performance",
+    "components": [
+      "cards-performance-item"
+    ]
+  },
+  {
+    "id": "cards-purpose",
+    "components": [
+      "cards-purpose-item"
+    ]
+  },
+  {
+    "id": "cards-work",
+    "components": [
+      "cards-work-item"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel-hero",
+    "components": [
+      "carousel-hero-item"
     ]
   },
   {
