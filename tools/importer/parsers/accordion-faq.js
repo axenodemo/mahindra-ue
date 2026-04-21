@@ -37,7 +37,7 @@ export default function parse(element, { document }) {
   });
 
   const block = WebImporter.Blocks.createBlock(document, {
-    name: 'Accordion FAQ',
+    name: 'Accordion Faq',
     cells: rows,
   });
 

@@ -55,7 +55,7 @@ const PAGE_TEMPLATE = {
     },
     {
       name: 'cards-performance',
-      instances: ['#block-companyrise .performace-driven-cards']
+      instances: ['#block-companyrise section.spirit-of-rise:not(.grey-bg) .performace-driven-cards']
     },
     {
       name: 'cards-future',

@@ -1,24 +1,65 @@
+/* cards-performance - Row of 3 performance cards (Mahindra design) */
+
 .cards-performance ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
 .cards-performance ul > li {
-  border: 1px solid var(--dark-color);
-  background-color: var(--background-color);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background-color: var(--text-color);
 }
 
-.cards-performance .cards-performance-card-body {
-  margin: 16px;
+.cards-performance .cards-performance-card-image {
+  position: relative;
+  width: 100%;
 }
 
 .cards-performance .cards-performance-card-image picture > img {
+  display: block;
   height: 100%;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.cards-performance .cards-performance-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 40px 20px 20px;
+  background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, transparent 100%);
+}
+
+.cards-performance .cards-performance-card-body h3,
+.cards-performance .cards-performance-card-body p {
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  font-size: var(--body-font-size-s);
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.cards-performance .cards-performance-card-body strong {
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Desktop: 3 columns */
+@media (width >= 900px) {
+  .cards-performance ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

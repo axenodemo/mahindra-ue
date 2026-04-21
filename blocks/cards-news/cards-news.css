@@ -1,24 +1,96 @@
+/* cards-news - News card layout (Mahindra design) */
+
 .cards-news ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
 .cards-news ul > li {
-  border: 1px solid var(--dark-color);
+  display: flex;
+  flex-direction: row;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 24px;
   background-color: var(--background-color);
 }
 
-.cards-news .cards-news-card-body {
-  margin: 16px;
+.cards-news .cards-news-card-image {
+  flex: 0 0 140px;
+  margin-right: 16px;
 }
 
 .cards-news .cards-news-card-image picture > img {
+  display: block;
   height: 100%;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  border-radius: 4px;
+}
+
+.cards-news .cards-news-card-body {
+  flex: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Category tag */
+.cards-news .cards-news-card-body p:first-child {
+  color: var(--link-color);
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.cards-news .cards-news-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cards-news .cards-news-card-body a {
+  color: var(--link-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.cards-news .cards-news-card-body a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* Date / meta */
+.cards-news .cards-news-card-body p:last-child {
+  color: var(--dark-color);
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Tablet+ : image larger */
+@media (width >= 600px) {
+  .cards-news .cards-news-card-image {
+    flex: 0 0 200px;
+    margin-right: 24px;
+  }
+}
+
+/* Desktop: 2 columns */
+@media (width >= 900px) {
+  .cards-news ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
