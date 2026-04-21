@@ -67,6 +67,21 @@
   }
 }
 
+/* Skip to main content — screen reader accessible, visually hidden */
+a[href="#main-content"] {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 8px 16px;
+  background: var(--link-color);
+  color: #fff;
+  text-decoration: none;
+}
+
+a[href="#main-content"]:focus {
+  left: 0;
+}
+
 body {
   display: none;
   margin: 0;

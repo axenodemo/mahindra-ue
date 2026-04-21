@@ -1,7 +1,8 @@
 /* carousel-hero - Full-width hero carousel slider (Mahindra design) */
 
-/* Remove section padding for full-bleed hero */
-.section.carousel-hero-container {
+/* Remove section padding and margin for full-bleed hero */
+/* stylelint-disable-next-line no-descending-specificity */
+main > .section.carousel-hero-container {
   margin: 0;
   padding: 0;
 }
