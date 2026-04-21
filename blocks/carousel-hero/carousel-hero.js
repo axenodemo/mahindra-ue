@@ -81,6 +81,19 @@ function createSlide(row, slideIndex, carouselId) {
     slide.append(column);
   });
 
+  // Check for dark-content marker: if content starts with <p><em>dark</em></p>, apply dark text
+  const contentDiv = slide.querySelector('.carousel-hero-slide-content');
+  if (contentDiv) {
+    const firstP = contentDiv.querySelector(':scope > p:first-child');
+    if (firstP) {
+      const em = firstP.querySelector('em');
+      if (em && em.textContent.trim().toLowerCase() === 'dark') {
+        slide.classList.add('dark-content');
+        firstP.remove();
+      }
+    }
+  }
+
   const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
   if (labeledBy) {
     slide.setAttribute('aria-labelledby', labeledBy.getAttribute('id'));
