@@ -15,126 +15,195 @@ footer .footer p {
 }
 
 /* ─── Section 1: Top bar — Logo + Social ─── */
-footer .footer > div > .section:first-child {
+footer .footer .footer-top .default-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 30px 24px;
   border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-footer .footer > div > .section:first-child .default-content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/* Logo text styling */
-footer .footer > div > .section:first-child .default-content-wrapper > p:first-child {
-  margin: 0;
-}
-
-footer .footer > div > .section:first-child .default-content-wrapper > p:first-child a {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--link-color);
+/* Logo image */
+footer .footer .footer-top .default-content-wrapper > p:first-child a {
+  display: inline-block;
   text-decoration: none;
-  text-transform: lowercase;
-  font-family: var(--heading-font-family);
 }
 
-/* Social links — inline row, right-aligned */
-footer .footer > div > .section:first-child .default-content-wrapper > ul {
+footer .footer .footer-top img {
+  height: 32px;
+  width: auto;
+}
+
+/* Social icons — inline row */
+footer .footer .footer-social {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
 }
 
-footer .footer > div > .section:first-child .default-content-wrapper > ul li {
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-social li {
   margin: 0;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:first-child .default-content-wrapper > ul a {
-  color: #474747;
-  font-size: 14px;
+footer .footer .footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
   text-decoration: none;
-  transition: color 0.2s;
 }
 
-footer .footer > div > .section:first-child .default-content-wrapper > ul a:hover {
-  color: var(--link-color);
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-social a:hover {
+  opacity: 1;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-social img {
+  width: 20px;
+  height: 20px;
 }
 
 /* ─── Section 2: Nav columns ─── */
-footer .footer > div > .section:nth-child(2) {
+footer .footer .footer-nav {
   padding: 40px 24px;
 }
 
-footer .footer > div > .section:nth-child(2) .default-content-wrapper {
+/* 5-column grid */
+.footer-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
 }
 
-/* Column heading links — dark, bold */
-/* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > p {
-  margin: 0 0 8px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ddd;
+.footer-col {
+  min-width: 0;
 }
 
+/* Column heading — dark, bold, with bottom border + spacing */
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > p a {
+footer .footer .footer-nav p strong a {
   color: #1c1c1c;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   text-decoration: none;
+  display: block;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 12px;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > p strong a {
-  color: #1c1c1c;
-  font-weight: 400;
-}
-
-/* Sub-link lists — grey, no bullets, border-bottom separators */
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > ul {
+/* All lists in footer nav — no bullets */
+/* stylelint-disable no-descending-specificity */
+footer .footer .footer-nav ul {
   list-style: none;
-  margin: 0 0 24px;
+  margin: 0;
   padding: 0;
 }
 
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > ul li {
-  padding: 10px 0;
+/* Level 1 items — border separators */
+footer .footer .footer-nav .footer-col > ul > li {
+  position: relative;
   border-bottom: 1px solid #e8e8e8;
-  margin: 0;
 }
 
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > ul li:last-child {
+footer .footer .footer-nav .footer-col > ul > li:last-child {
   border-bottom: none;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > ul a {
+/* Level 1 links — grey */
+footer .footer .footer-nav .footer-col > ul > li > a {
   color: #474747;
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
+  display: block;
+  padding: 10px 30px 10px 0;
   transition: color 0.2s;
 }
 
-footer .footer > div > .section:nth-child(2) .default-content-wrapper > ul a:hover {
+footer .footer .footer-nav li > a:hover {
   color: var(--link-color);
 }
 
+/* Arrow toggle for items with children */
+.footer-arrow {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.footer-arrow::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #474747;
+  border-bottom: 2px solid #474747;
+  transform: rotate(-45deg);
+  transition: transform 0.3s;
+}
+
+.expanded > .footer-arrow::after {
+  transform: rotate(45deg);
+}
+
+/* Level 2 sub-lists — indented, red links */
+footer .footer .footer-nav li > ul {
+  padding-left: 16px;
+}
+
+footer .footer .footer-nav li > ul > li {
+  border-bottom: 1px solid #e8e8e8;
+  position: relative;
+}
+
+footer .footer .footer-nav li > ul > li:last-child {
+  border-bottom: none;
+}
+
+footer .footer .footer-nav li > ul > li > a {
+  color: var(--link-color);
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  display: block;
+  padding: 10px 30px 10px 0;
+}
+
+/* Level 3+ items — dash prefix, smaller */
+footer .footer .footer-nav li > ul > li > ul > li > a {
+  color: #474747;
+  font-size: 14px;
+  padding-left: 8px;
+}
+
+footer .footer .footer-nav li > ul > li > ul > li > a::before {
+  content: '- ';
+}
+
+footer .footer .footer-nav li > ul > li > ul > li {
+  border-bottom: none;
+}
+/* stylelint-enable no-descending-specificity */
+
 /* ─── Section 3: Bottom bar — Red bg ─── */
-footer .footer > div > .section:last-child {
+footer .footer .footer-bottom .default-content-wrapper {
   background-color: var(--link-color);
   padding: 20px 24px;
   display: flex;
@@ -144,17 +213,9 @@ footer .footer > div > .section:last-child {
   gap: 12px;
 }
 
-footer .footer > div > .section:last-child .default-content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
 /* Legal links — inline with pipe separators */
-footer .footer > div > .section:last-child .default-content-wrapper > ul {
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-bottom ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -165,23 +226,25 @@ footer .footer > div > .section:last-child .default-content-wrapper > ul {
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:last-child .default-content-wrapper > ul li {
+footer .footer .footer-bottom ul li {
   margin: 0;
   padding: 0 12px;
   border-right: 1px solid rgb(255 255 255 / 50%);
   line-height: 1;
 }
 
-footer .footer > div > .section:last-child .default-content-wrapper > ul li:first-child {
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-bottom ul li:first-child {
   padding-left: 0;
 }
 
-footer .footer > div > .section:last-child .default-content-wrapper > ul li:last-child {
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-bottom ul li:last-child {
   border-right: none;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:last-child .default-content-wrapper > ul a {
+footer .footer .footer-bottom ul a {
   color: #fff;
   font-size: 13px;
   font-weight: 400;
@@ -189,66 +252,54 @@ footer .footer > div > .section:last-child .default-content-wrapper > ul a {
   transition: opacity 0.2s;
 }
 
-footer .footer > div > .section:last-child .default-content-wrapper > ul a:hover {
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer .footer-bottom ul a:hover {
   opacity: 0.8;
 }
 
-/* Copyright text — white, right-aligned */
+/* Copyright text — white */
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div > .section:last-child .default-content-wrapper > p {
+footer .footer .footer-bottom .default-content-wrapper > p {
   color: #fff;
   font-size: 13px;
   font-weight: 400;
   margin: 0;
 }
 
-/* ─── Desktop: 5-column nav layout ─── */
+/* ─── Desktop: 5-column ─── */
 @media (width >= 900px) {
-  footer .footer > div > .section:first-child {
+  footer .footer .footer-top .default-content-wrapper {
     padding: 30px 32px;
   }
 
-  footer .footer > div > .section:nth-child(2) {
+  footer .footer .footer-nav {
     padding: 40px 32px;
   }
 
-  footer .footer > div > .section:nth-child(2) .default-content-wrapper {
-    display: block;
-    columns: 5;
-    column-gap: 32px;
+  .footer-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 
-  /* Keep heading + its list together in same column */
-  footer .footer > div > .section:nth-child(2) .default-content-wrapper > p,
-  footer .footer > div > .section:nth-child(2) .default-content-wrapper > ul {
-    break-inside: avoid;
-  }
-
-  footer .footer > div > .section:last-child {
+  footer .footer .footer-bottom .default-content-wrapper {
     padding: 20px 32px;
   }
 }
 
-/* ─── Mobile adjustments ─── */
+/* ─── Mobile ─── */
 @media (width < 600px) {
-  footer .footer > div > .section:first-child {
+  footer .footer .footer-top .default-content-wrapper {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
   }
 
-  footer .footer > div > .section:first-child .default-content-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  footer .footer > div > .section:last-child .default-content-wrapper {
+  footer .footer .footer-bottom .default-content-wrapper {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  footer .footer > div > .section:last-child .default-content-wrapper > p {
+  /* stylelint-disable-next-line no-descending-specificity */
+  footer .footer .footer-bottom .default-content-wrapper > p {
     margin-top: 8px;
   }
 }
