@@ -24,10 +24,12 @@
   padding-bottom: 32px;
   opacity: 0;
   transform: translateY(40px);
+  transition: opacity 0.65s ease-in-out, transform 0.65s ease-in-out;
 }
 
 .section.cards-business-container.cards-business-visible .default-content-wrapper {
-  animation: cards-fade-up 0.65s ease-out both;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section.cards-business-container .default-content-wrapper p {
@@ -37,11 +39,17 @@
   max-width: 70%;
 }
 
+/* Cards wrapper - full width, no max-width constraint */
+.section.cards-business-container .cards-business-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
 /* Grid layout */
 .cards-business > ul {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 12px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
@@ -56,27 +64,35 @@
   background-color: #1a1a1a;
   cursor: pointer;
   aspect-ratio: 5 / 2;
-  transition: transform 0.3s, box-shadow 0.3s;
   opacity: 0;
   transform: translateY(40px);
+  transition: opacity 0.65s ease-in-out, transform 0.65s ease-in-out;
 }
 
-/* Hover effect */
-.cards-business > ul > li:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgb(0 0 0 / 25%);
+/* Hover zoom on the image, not the card itself */
+.cards-business > ul > li .cards-business-card-body:first-child img {
+  transition: transform 0.4s ease;
 }
 
-/* Staggered card animation on scroll */
-.cards-business-visible .cards-business > ul > li:nth-child(1) { animation: cards-fade-up 0.65s 0.1s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(2) { animation: cards-fade-up 0.65s 0.15s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(3) { animation: cards-fade-up 0.65s 0.2s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(4) { animation: cards-fade-up 0.65s 0.25s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(5) { animation: cards-fade-up 0.65s 0.3s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(6) { animation: cards-fade-up 0.65s 0.35s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(7) { animation: cards-fade-up 0.65s 0.4s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(8) { animation: cards-fade-up 0.65s 0.45s ease-out both; }
-.cards-business-visible .cards-business > ul > li:nth-child(9) { animation: cards-fade-up 0.65s 0.5s ease-out both; }
+.cards-business > ul > li:hover .cards-business-card-body:first-child img {
+  transform: scale(1.08);
+}
+
+/* Staggered card reveal on scroll - using transitions not animations */
+.cards-business-visible .cards-business > ul > li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cards-business-visible .cards-business > ul > li:nth-child(1) { transition-delay: 0.05s; }
+.cards-business-visible .cards-business > ul > li:nth-child(2) { transition-delay: 0.1s; }
+.cards-business-visible .cards-business > ul > li:nth-child(3) { transition-delay: 0.15s; }
+.cards-business-visible .cards-business > ul > li:nth-child(4) { transition-delay: 0.2s; }
+.cards-business-visible .cards-business > ul > li:nth-child(5) { transition-delay: 0.25s; }
+.cards-business-visible .cards-business > ul > li:nth-child(6) { transition-delay: 0.3s; }
+.cards-business-visible .cards-business > ul > li:nth-child(7) { transition-delay: 0.35s; }
+.cards-business-visible .cards-business > ul > li:nth-child(8) { transition-delay: 0.4s; }
+.cards-business-visible .cards-business > ul > li:nth-child(9) { transition-delay: 0.45s; }
 
 /* Image div (first child) - absolute fill */
 .cards-business .cards-business-card-body:first-child {
@@ -95,6 +111,7 @@
   line-height: 0;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .cards-business .cards-business-card-body:first-child img {
   width: 100%;
   height: 100%;
@@ -130,7 +147,7 @@
   border-bottom: 2px solid #fff;
 }
 
-/* Diagonal arrow ↗ after title text */
+/* Diagonal arrow after title text */
 .cards-business .cards-business-card-body:last-child p::after {
   content: '↗';
   display: inline-block;
@@ -147,7 +164,7 @@
   }
 }
 
-/* Desktop: 3 columns with original proportions */
+/* Desktop: 3 columns */
 @media (width >= 900px) {
   .section.cards-business-container {
     padding: 80px 0;
@@ -155,6 +172,10 @@
 
   .cards-business > ul {
     grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+    max-width: 1280px;
+    margin: 0 auto;
   }
 
   .section.cards-business-container .default-content-wrapper p {

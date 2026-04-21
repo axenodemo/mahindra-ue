@@ -346,5 +346,11 @@
 
   .section.carousel-hero-container > .default-content-wrapper li {
     padding: 10px 24px;
+    border-right: none;
+  }
+
+  .section.carousel-hero-container > .default-content-wrapper a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 }
