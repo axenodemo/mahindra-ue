@@ -289,19 +289,19 @@
   }
 }
 
-/* Quick links bar below hero carousel */
-.section.carousel-hero-container > .default-content-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 8px 24px;
-  border-bottom: 1px solid #e0e0e0;
+/* Quick links bar below hero carousel — override global section > div styles */
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-color);
 }
 
-.section.carousel-hero-container > .default-content-wrapper ul {
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -309,48 +309,72 @@
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-.section.carousel-hero-container > .default-content-wrapper a {
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type a {
   color: var(--text-color);
   font-size: 15px;
   font-weight: 400;
+  font-family: var(--body-font-family);
   text-decoration: none;
   white-space: nowrap;
-  transition: color 0.2s;
+  line-height: 26px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  display: block;
 }
 
-.section.carousel-hero-container > .default-content-wrapper a:hover {
-  color: var(--link-color);
-  text-decoration: underline;
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type a:hover {
+  color: var(--text-color);
+  border-bottom-color: var(--text-color);
+  text-decoration: none;
 }
 
-.section.carousel-hero-container > .default-content-wrapper li {
-  padding: 8px 16px;
-  border-right: 1px solid #ccc;
+/* Mobile: grid layout with border lines */
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li {
+  box-sizing: border-box;
+  padding: 12px 16px;
   line-height: 1;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  width: 50%;
 }
 
-.section.carousel-hero-container > .default-content-wrapper li:last-child {
-  border-right: none;
+/* First two items full width */
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li:nth-child(1),
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li:nth-child(2) {
+  width: 100%;
+}
+
+/* Vertical divider on left item of each pair (3rd, 5th) */
+main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li:nth-child(odd):not(:nth-child(1)) {
+  border-right: 1px solid #ddd;
 }
 
 /* Hide skip-to-content link wrapper */
-.section.carousel-hero-container > .default-content-wrapper:first-of-type {
+main > .section.carousel-hero-container > .default-content-wrapper:first-of-type {
   padding: 0;
-  border: none;
+  background: none;
 }
 
+/* Desktop: inline row, no borders */
 @media (width >= 900px) {
-  .section.carousel-hero-container > .default-content-wrapper {
-    padding: 12px 32px;
+  main > .section.carousel-hero-container > .default-content-wrapper:last-of-type {
+    padding: 8px 0;
   }
 
-  .section.carousel-hero-container > .default-content-wrapper li {
-    padding: 10px 24px;
+  main > .section.carousel-hero-container > .default-content-wrapper:last-of-type ul {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    align-items: center;
+  }
+
+  main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li,
+  main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li:nth-child(1),
+  main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li:nth-child(2),
+  main > .section.carousel-hero-container > .default-content-wrapper:last-of-type li:nth-child(odd):not(:nth-child(1)) {
+    width: auto;
+    padding: 10px 20px;
+    border-bottom: none;
     border-right: none;
-  }
-
-  .section.carousel-hero-container > .default-content-wrapper a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
   }
 }
