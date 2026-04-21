@@ -1,8 +1,10 @@
 {
   "mappings": [
-    "/content/aem-boilerplate/:/"
+    "/content/mahindra-ue/:/",
+    "/content/mahindra-ue/configuration:/.helix/config.json",
+    "/content/mahindra-ue/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/aem-boilerplate/"
+    "/content/mahindra-ue/"
   ]
 }
