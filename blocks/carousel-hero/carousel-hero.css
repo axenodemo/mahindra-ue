@@ -131,6 +131,22 @@
   text-shadow: 0 2px 8px rgb(0 0 0 / 40%);
 }
 
+/* Dark content variant - authorable via <em>dark</em> marker in content */
+.carousel-hero .carousel-hero-slide.dark-content .carousel-hero-slide-content {
+  color: var(--text-color);
+}
+
+.carousel-hero .carousel-hero-slide.dark-content .carousel-hero-slide-content h1,
+.carousel-hero .carousel-hero-slide.dark-content .carousel-hero-slide-content h2,
+.carousel-hero .carousel-hero-slide.dark-content .carousel-hero-slide-content h3 {
+  color: var(--text-color);
+  text-shadow: none;
+}
+
+.carousel-hero .carousel-hero-slide.dark-content .carousel-hero-slide-content p {
+  color: var(--dark-color);
+}
+
 /* Description paragraph (strong text) */
 .carousel-hero .carousel-hero-slide .carousel-hero-slide-content p strong {
   font-weight: 400;
