@@ -92,6 +92,13 @@ export default async function decorate(block) {
     const wrapper = navSection.querySelector('.default-content-wrapper');
     if (wrapper) buildColumnGrid(wrapper);
     decorateNavColumns(navSection);
+
+    // Strip button classes from nav links (AEM wraps links in p.button-container)
+    navSection.querySelectorAll('.button').forEach((btn) => {
+      btn.className = '';
+      const bc = btn.closest('.button-container');
+      if (bc) bc.className = '';
+    });
   }
 
   // Tag social list and wrap logo image in link

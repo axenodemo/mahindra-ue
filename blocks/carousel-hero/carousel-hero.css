@@ -250,6 +250,80 @@ main > .section.carousel-hero-container {
   left: calc(50% - 1px);
 }
 
+/* ── Slide transition animations ─────────────────────────────────── */
+
+/* Title slide-in: text enters from bottom with fade — delayed so image shows first */
+@keyframes hero-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Beam: clip-path reveal from left to right */
+@keyframes hero-beam-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Active slide: content hidden initially, then slides in after image shows */
+.carousel-hero .carousel-hero-slide[aria-hidden='false'] .carousel-hero-slide-content {
+  animation: hero-slide-in 0.7s ease-out 0.8s both;
+}
+
+/* Two diagonal red beam lines matching live site exactly */
+/* stylelint-disable no-descending-specificity */
+.carousel-hero .carousel-hero-slide.hero-beam-active .carousel-hero-slide-content::before,
+.carousel-hero .carousel-hero-slide.hero-beam-active .carousel-hero-slide-content::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 8px;
+  background: #dd052b;
+  left: 0;
+  top: 50px;
+  z-index: 3;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+}
+
+/* Top-left beam — translates left outside content, sweeps in */
+.carousel-hero .carousel-hero-slide.hero-beam-active .carousel-hero-slide-content::before {
+  transform: rotate(-20deg) skew(-20deg) translate(-120%, 0);
+  animation: hero-beam-reveal 0.6s ease-out 0.4s both;
+}
+
+/* Bottom-right beam — translates right past content, sweeps in */
+.carousel-hero .carousel-hero-slide.hero-beam-active .carousel-hero-slide-content::after {
+  transform: rotate(-20deg) skew(-20deg) translate(200%, 0);
+  animation: hero-beam-reveal 0.6s ease-out 0.5s both;
+}
+/* stylelint-enable no-descending-specificity */
+
+/* Nav buttons: hover/active — white bg, red arrow */
+/* stylelint-disable no-descending-specificity */
+.carousel-hero .carousel-hero-navigation-buttons button:hover,
+.carousel-hero .carousel-hero-navigation-buttons button:active {
+  background-color: #fff;
+  border: 1px solid var(--link-color);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button:hover::after,
+.carousel-hero .carousel-hero-navigation-buttons button:active::after {
+  border-color: var(--link-color);
+}
+/* stylelint-enable no-descending-specificity */
+
 /* Desktop */
 @media (width >= 900px) {
   .carousel-hero .carousel-hero-slide {
