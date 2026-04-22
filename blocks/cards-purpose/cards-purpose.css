@@ -41,10 +41,12 @@
   transform: translateY(0);
 }
 
-/* Cards wrapper - full width */
+/* Cards wrapper - container constraint */
 .section.cards-purpose-container .cards-purpose-wrapper {
-  max-width: none;
-  padding: 0;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 /* Grid layout */
@@ -155,9 +157,7 @@
 @media (width >= 900px) {
   .cards-purpose > ul {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 12px;
+    padding: 0;
   }
 
   .cards-purpose .cards-purpose-card-body:last-child {
@@ -170,7 +170,7 @@
 }
 
 @media (width >= 1400px) {
-  .cards-purpose > ul {
+  .section.cards-purpose-container .cards-purpose-wrapper {
     max-width: 1280px;
   }
 }

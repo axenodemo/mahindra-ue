@@ -19,10 +19,12 @@
   transition: opacity 0.65s ease-in-out, transform 0.65s ease-in-out;
 }
 
-/* Cards wrapper full width */
+/* Cards wrapper - container constraint */
 .section.cards-work-container .cards-work-wrapper {
-  max-width: none;
-  padding: 0;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 /* Grid - mobile: single column */
@@ -178,9 +180,7 @@
 @media (width >= 900px) {
   .cards-work > ul {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 12px;
+    padding: 0;
   }
 
   /* First card (SOAR with image) spans full width, horizontal layout */
@@ -227,7 +227,7 @@
 }
 
 @media (width >= 1400px) {
-  .cards-work > ul {
+  .section.cards-work-container .cards-work-wrapper {
     max-width: 1280px;
   }
 }
