@@ -286,6 +286,12 @@ main > .section:first-of-type {
   }
 }
 
+@media (width >= 1300px) {
+  main > .section > div {
+    max-width: 1280px;
+  }
+}
+
 /* section metadata */
 main .section.light,
 main .section.highlight {
@@ -299,4 +305,79 @@ main .section.grey {
   background-color: var(--light-color);
   margin: 0;
   padding: 48px 0;
+}
+
+/* ── Visibility fallback for scroll-triggered animations ─────────── */
+
+/* Ensures blocks become visible even if IntersectionObserver doesn't fire */
+@keyframes force-visible {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main .section .default-content-wrapper,
+main .section .cards-business,
+main .section .cards-purpose,
+main .section .cards-performance,
+main .section .cards-news,
+main .section .cards-work,
+main .section .accordion-faq,
+main .section .cards-business > ul > li,
+main .section .cards-purpose > ul > li,
+main .section .cards-performance > ul > li,
+main .section .cards-news > ul > li,
+main .section .cards-work > ul > li {
+  animation: force-visible 0s 3s forwards;
+}
+
+/* ── Global card image coverage ──────────────────────────────────── */
+
+/* Ensures images cover the full card area across all card blocks    */
+
+/* Handles both <img> and <picture><img> DOM structures from AEM     */
+.cards-business-card-image,
+.cards-purpose-card-image,
+.cards-performance-card-image,
+.cards-news-card-image,
+.cards-work-card-image,
+.cards-business-card-body:first-child,
+.cards-purpose-card-body:first-child,
+.cards-performance-card-body:first-child,
+.cards-news-card-body:first-child,
+.cards-work-card-body:first-child {
+  overflow: hidden;
+  line-height: 0;
+}
+
+.cards-business-card-image picture,
+.cards-purpose-card-image picture,
+.cards-performance-card-image picture,
+.cards-news-card-image picture,
+.cards-work-card-image picture,
+.cards-business-card-body:first-child picture,
+.cards-purpose-card-body:first-child picture,
+.cards-performance-card-body:first-child picture,
+.cards-news-card-body:first-child picture,
+.cards-work-card-body:first-child picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cards-business-card-image img,
+.cards-purpose-card-image img,
+.cards-performance-card-image img,
+.cards-news-card-image img,
+.cards-work-card-image img,
+.cards-business-card-body:first-child img,
+.cards-purpose-card-body:first-child img,
+.cards-performance-card-body:first-child img,
+.cards-news-card-body:first-child img,
+.cards-work-card-body:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
