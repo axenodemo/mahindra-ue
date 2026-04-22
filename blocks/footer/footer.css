@@ -109,13 +109,16 @@ footer .footer .footer-nav ul {
   padding: 0;
 }
 
-/* Override AEM button styling on footer nav links */
-footer .footer .footer-nav .button-container {
+/* Override AEM button styling and p-wrapper on footer nav links */
+footer .footer .footer-nav .button-container,
+footer .footer .footer-nav li > p {
   margin: 0;
   padding: 0;
+  display: contents;
 }
 
-footer .footer .footer-nav a.button {
+footer .footer .footer-nav a.button,
+footer .footer .footer-nav li > p > a {
   color: #474747;
   background: none;
   border: none;
