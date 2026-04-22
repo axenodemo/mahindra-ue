@@ -147,6 +147,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 .mega-nav-btn {
   background: transparent;
   border: none;
+  border-radius: 0;
   padding: 8px 18px;
   font-size: 14px;
   font-weight: 500;
@@ -155,6 +156,15 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transition: color 0.2s;
   font-family: inherit;
   white-space: nowrap;
+  outline: none;
+}
+
+.mega-nav-btn:focus,
+.mega-nav-btn:active,
+.mega-nav-btn:hover {
+  background: transparent !important;
+  outline: none;
+  border: none;
 }
 
 .mega-nav-btn:hover,
@@ -204,13 +214,14 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   display: flex;
 }
 
-/* ── Sidebar (beige) ──────────────────────────────────────────────── */
+/* ── Sidebar (white — matches original left panel) ───────────────── */
 .mega-sidebar {
   flex: 0 0 30%;
   max-width: 30%;
-  background: #f7f5ef;
+  background: #fff;
   padding: 48px 40px;
   box-sizing: border-box;
+  border-right: 1px solid #e8e8e8;
 }
 
 .mega-sidebar-heading {
@@ -268,108 +279,111 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   margin-top: 4px;
 }
 
-/* ── Content (right side, white) ──────────────────────────────────── */
+/* ── Content (right side, white) — column-panel navigation ────────── */
 .mega-content {
   flex: 1 1 70%;
   display: flex;
-  gap: 40px;
-  padding: 48px 40px;
+  gap: 0;
+  padding: 0;
   box-sizing: border-box;
+  min-height: 350px;
 }
 
+/* stylelint-disable no-descending-specificity */
+
+/* Each column — beige bg, separated by left border */
 .mega-column {
   flex: 1;
   min-width: 0;
+  padding: 32px 28px;
+  background: #f7f5ef;
+  border-left: 1px solid #e8e8e8;
 }
 
-/* ── Navigation links inside panels ───────────────────────────────── */
-.mega-link-list,
-.mega-sub-list {
+.mega-column:first-child {
+  border-left: none;
+}
+
+/* Dynamic sub-columns get beige tint like original */
+.mega-dynamic-col {
+  background: #faf8f4;
+  animation: mega-col-fade-in 0.2s ease;
+}
+
+/* Navigation links list */
+.mega-link-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+/* Each link item */
 .mega-link-item {
   position: relative;
+  border-bottom: 1px solid #e8e8e8;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
+.mega-link-item:last-child {
+  border-bottom: none;
+}
+
 .mega-link-item > a {
   display: block;
-  padding: 8px 0;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 12px 32px 12px 0;
+  font-size: 15px;
+  font-weight: 400;
   color: #333;
   text-decoration: none;
   transition: color 0.15s;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.mega-link-item > a:hover,
-.mega-link-item > a.has-children:hover {
+.mega-link-item > a:hover {
   color: #e41e26;
 }
 
-/* Expand button (chevron) */
-.mega-expand-btn {
-  position: absolute;
-  right: 0;
-  top: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 4px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Active item — red text + red bottom border */
+.mega-link-item.mega-active-item > a {
+  color: #e41e26;
 }
 
-.mega-chevron {
-  display: inline-block;
+.mega-link-item.mega-active-item {
+  border-bottom-color: #e41e26;
+}
+
+/* Right-pointing chevron for items with children */
+.mega-chevron-right {
+  position: absolute;
+  right: 8px;
+  top: 50%;
   width: 8px;
   height: 8px;
   border-right: 2px solid #999;
   border-bottom: 2px solid #999;
-  transform: rotate(-45deg);
-  transition: transform 0.2s ease;
+  transform: translateY(-50%) rotate(-45deg);
+  pointer-events: none;
 }
 
-.mega-expand-btn.mega-expanded .mega-chevron {
-  transform: rotate(45deg);
+.mega-link-item.has-sub {
+  cursor: pointer;
 }
 
-/* Sub-list collapse */
-.mega-sub-list {
-  padding-left: 16px;
-  overflow: hidden;
-  max-height: 500px;
-  transition: max-height 0.3s ease, opacity 0.25s ease;
-  opacity: 1;
+.mega-link-item.mega-active-item .mega-chevron-right {
+  border-color: #e41e26;
 }
 
-.mega-sub-list.mega-collapsed {
-  max-height: 0;
-  opacity: 0;
+@keyframes mega-col-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.mega-sub-list .mega-link-item > a {
-  font-weight: 400;
-  font-size: 13px;
-  color: #555;
-  padding: 6px 0;
-}
-
-.mega-sub-list .mega-link-item > a:hover {
-  color: #e41e26;
-}
-
-/* Active item highlighting */
-/* stylelint-disable-next-line no-descending-specificity */
-.mega-item-open > a {
-  color: #e41e26 !important;
-}
+/* stylelint-enable no-descending-specificity */
 
 /* ── Mobile menu ──────────────────────────────────────────────────── */
 .mega-mobile-menu {

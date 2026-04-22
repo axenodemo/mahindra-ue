@@ -94,11 +94,21 @@ export default async function decorate(block) {
     decorateNavColumns(navSection);
   }
 
-  // Tag social list
+  // Tag social list and wrap logo image in link
   const topSection = footer.querySelector('.footer-top');
   if (topSection) {
     const socialList = topSection.querySelector('ul');
     if (socialList) socialList.classList.add('footer-social');
+
+    // Wrap logo image in a home link (image-only, not a button)
+    const logoImg = topSection.querySelector('img');
+    if (logoImg && !logoImg.closest('a')) {
+      const homeLink = document.createElement('a');
+      homeLink.href = 'https://www.mahindra.com/';
+      homeLink.setAttribute('aria-label', 'Mahindra Home');
+      logoImg.parentElement.insertBefore(homeLink, logoImg);
+      homeLink.append(logoImg);
+    }
   }
 
   block.append(footer);

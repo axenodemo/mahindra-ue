@@ -68,8 +68,6 @@ const MEGA_MENU_DATA = {
             },
           ],
         },
-      ],
-      [
         { label: 'Our Brands', href: '/our-brands' },
         { label: 'Global Presence', href: '/our-business/global-presence' },
         { label: 'Cultural Outreach', href: '/cultural-outreach' },
@@ -169,48 +167,36 @@ function buildSidebar(data) {
   return aside;
 }
 
-function buildNavItems(items, depth = 0) {
+/**
+ * Build a single column list of links.
+ * Items with children get a chevron; clicking shows children in the next column.
+ */
+function buildColumnList(items) {
   const ul = document.createElement('ul');
-  ul.className = depth === 0 ? 'mega-link-list' : 'mega-sub-list';
-
+  ul.className = 'mega-link-list';
   items.forEach((item) => {
     const li = document.createElement('li');
     li.className = 'mega-link-item';
-
-    const hasChildren = item.children && item.children.length > 0;
-
     const a = document.createElement('a');
     a.href = item.href;
     a.textContent = item.label;
-    if (hasChildren) a.classList.add('has-children');
     li.append(a);
-
-    if (hasChildren) {
-      const toggle = document.createElement('button');
-      toggle.className = 'mega-expand-btn';
-      toggle.setAttribute('aria-label', `Expand ${item.label}`);
-      toggle.innerHTML = '<span class="mega-chevron"></span>';
-      li.append(toggle);
-
-      const subList = buildNavItems(item.children, depth + 1);
-      subList.classList.add('mega-collapsed');
-      li.append(subList);
-
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = !subList.classList.contains('mega-collapsed');
-        subList.classList.toggle('mega-collapsed', isOpen);
-        toggle.classList.toggle('mega-expanded', !isOpen);
-        li.classList.toggle('mega-item-open', !isOpen);
-      });
+    if (item.children && item.children.length > 0) {
+      li.classList.add('has-sub');
+      const chevron = document.createElement('span');
+      chevron.className = 'mega-chevron-right';
+      li.append(chevron);
+      li.dataset.children = JSON.stringify(item.children);
     }
-
     ul.append(li);
   });
-
   return ul;
 }
 
+/**
+ * Build mega panel with column-based sub-navigation.
+ * Clicking an item with children reveals them in the next column to the right.
+ */
 function buildMegaPanel(key) {
   const data = MEGA_MENU_DATA[key];
   if (!data) return null;
@@ -224,11 +210,53 @@ function buildMegaPanel(key) {
   const content = document.createElement('div');
   content.className = 'mega-content';
 
+  // Build initial columns from data
   data.columns.forEach((col) => {
     const colDiv = document.createElement('div');
     colDiv.className = 'mega-column';
-    colDiv.append(buildNavItems(col));
+    colDiv.append(buildColumnList(col));
     content.append(colDiv);
+  });
+
+  // Hover handler: when hovering an item with children, show children in next column
+  content.addEventListener('mouseover', (e) => {
+    const li = e.target.closest('.has-sub');
+    if (!li) return;
+
+    // Prevent re-triggering if already active
+    if (li.classList.contains('mega-active-item')) return;
+
+    const currentCol = li.closest('.mega-column');
+    const allCols = [...content.querySelectorAll('.mega-column')];
+    const colIndex = allCols.indexOf(currentCol);
+
+    // Remove all dynamic columns after the hovered column
+    allCols.forEach((col, i) => {
+      if (i > colIndex && col.classList.contains('mega-dynamic-col')) {
+        col.remove();
+      }
+    });
+
+    // Deactivate siblings in current column
+    currentCol.querySelectorAll('.mega-link-item.mega-active-item').forEach((item) => {
+      item.classList.remove('mega-active-item');
+    });
+
+    // Activate hovered item
+    li.classList.add('mega-active-item');
+
+    // Create new column with children
+    const children = JSON.parse(li.dataset.children);
+    if (children.length > 0) {
+      const newCol = document.createElement('div');
+      newCol.className = 'mega-column mega-dynamic-col';
+      newCol.append(buildColumnList(children));
+      if (currentCol.nextElementSibling) {
+        content.insertBefore(newCol, currentCol.nextElementSibling);
+      } else {
+        content.append(newCol);
+      }
+    }
   });
 
   panel.append(content);
@@ -293,9 +321,34 @@ function buildMobileMenu() {
     }
     inner.append(sidebarInfo);
 
-    // links
+    // links — flat list for mobile (recursive)
+    function buildMobileLinks(items) {
+      const ul = document.createElement('ul');
+      ul.className = 'mega-link-list';
+      items.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'mega-link-item';
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.label;
+        li.append(a);
+        if (item.children && item.children.length > 0) {
+          const subUl = buildMobileLinks(item.children);
+          subUl.style.display = 'none';
+          subUl.style.paddingLeft = '16px';
+          li.append(subUl);
+          a.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            const open = subUl.style.display !== 'none';
+            subUl.style.display = open ? 'none' : 'block';
+          });
+        }
+        ul.append(li);
+      });
+      return ul;
+    }
     data.columns.forEach((col) => {
-      inner.append(buildNavItems(col));
+      inner.append(buildMobileLinks(col));
     });
 
     section.append(inner);
@@ -344,13 +397,23 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
-  // Clean brand link
+  // Brand: wrap image in a home link (image-only, not a button)
   const navBrand = nav.querySelector('.nav-brand');
   if (navBrand) {
-    const brandLink = navBrand.querySelector('.button');
-    if (brandLink) {
-      brandLink.className = '';
-      brandLink.closest('.button-container').className = '';
+    // Remove any button classes EDS may have added
+    navBrand.querySelectorAll('.button').forEach((btn) => {
+      btn.className = '';
+      const bc = btn.closest('.button-container');
+      if (bc) bc.className = '';
+    });
+    // Ensure the logo image is wrapped in a link to home
+    const brandImg = navBrand.querySelector('img');
+    if (brandImg && !brandImg.closest('a')) {
+      const homeLink = document.createElement('a');
+      homeLink.href = '/';
+      homeLink.setAttribute('aria-label', 'Mahindra Home');
+      brandImg.parentElement.insertBefore(homeLink, brandImg);
+      homeLink.append(brandImg);
     }
   }
 
