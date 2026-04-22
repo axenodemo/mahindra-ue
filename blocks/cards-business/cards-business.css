@@ -174,8 +174,8 @@
   .cards-business > ul {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    padding: 0 16px;
-    max-width: 1280px;
+    padding: 0 60px;
+    max-width: 1140px;
     margin: 0 auto;
   }
 
@@ -185,5 +185,11 @@
 
   .cards-business .cards-business-card-body:last-child p {
     font-size: 18px;
+  }
+}
+
+@media (width >= 1400px) {
+  .cards-business > ul {
+    max-width: 1280px;
   }
 }
