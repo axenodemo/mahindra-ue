@@ -16,6 +16,24 @@ function updateActiveSlide(slide) {
         link.removeAttribute('tabindex');
       }
     });
+
+    // Re-trigger slide-in animation on active slide content
+    if (idx === slideIndex) {
+      const content = aSlide.querySelector('.carousel-hero-slide-content');
+      if (content) {
+        content.style.animation = 'none';
+        // eslint-disable-next-line no-unused-expressions
+        content.offsetHeight; // force reflow
+        content.style.animation = '';
+      }
+      // Re-trigger beam animation
+      aSlide.classList.remove('hero-beam-active');
+      // eslint-disable-next-line no-unused-expressions
+      aSlide.offsetHeight;
+      aSlide.classList.add('hero-beam-active');
+    } else {
+      aSlide.classList.remove('hero-beam-active');
+    }
   });
 
   const indicators = block.querySelectorAll('.carousel-hero-slide-indicator');
