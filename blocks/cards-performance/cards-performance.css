@@ -99,12 +99,22 @@
   line-height: 0;
 }
 
+.cards-performance .cards-performance-card-body:first-child picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* stylelint-disable-next-line no-descending-specificity */
 .cards-performance .cards-performance-card-body:first-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  position: absolute;
+  inset: 0;
 }
 
 /* Text overlay (last child) - positioned at top-left, top: 32px like original */
