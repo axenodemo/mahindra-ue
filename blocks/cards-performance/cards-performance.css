@@ -142,9 +142,9 @@
 @media (width >= 900px) {
   .cards-performance > ul {
     grid-template-columns: repeat(3, 1fr);
-    max-width: 1280px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 12px;
     gap: 20px;
   }
 
@@ -154,5 +154,11 @@
 
   .section.cards-performance-container .default-content-wrapper p {
     font-size: 16px;
+  }
+}
+
+@media (width >= 1400px) {
+  .cards-performance > ul {
+    max-width: 1280px;
   }
 }
